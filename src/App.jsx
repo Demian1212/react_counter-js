@@ -2,40 +2,59 @@ import { useState } from 'react';
 import './App.scss';
 
 export const App = () => {
-  const [count] = useState(0);
+  const [count, setCount] = useState(0);
 
   const addOne = () => {
-    // write code here
+    setCount(prevCount => prevCount + 1);
   };
 
   const add100 = () => {
-    // write code here
+    setCount(prevCount => prevCount + 100);
   };
 
-  // DON'T change the code below
   const increase = () => {
-    if (count % 5 === 0) {
-      add100();
-    }
+    setCount(prevCount => {
+      const newCount = prevCount + 1;
 
-    addOne();
+      if (newCount > 0 && newCount % 5 === 0) {
+        return newCount + 100;
+      }
+
+      return newCount;
+    });
   };
 
   return (
-    <div className="App">
-      <h1 className="App__title">{`Count: ${count}`}</h1>
+    <div className="section">
+      <div className="container">
+        <h1 className="title App__title">Count: {count}</h1>
 
-      <button type="button" className="App__add-one" onClick={addOne}>
-        Add 1
-      </button>
+        <div className="buttons">
+          <button
+            type="button"
+            className="button is-success App__add-one"
+            onClick={addOne}
+          >
+            Add 1
+          </button>
 
-      <button type="button" className="App__add-100" onClick={add100}>
-        Add 100
-      </button>
+          <button
+            type="button"
+            className="button is-info App__add-100"
+            onClick={add100}
+          >
+            Add 100
+          </button>
 
-      <button type="button" className="App__increase" onClick={increase}>
-        Increase
-      </button>
+          <button
+            type="button"
+            className="button is-warning App__increase"
+            onClick={increase}
+          >
+            Increase
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
